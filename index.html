@@ -40,10 +40,10 @@
                             <div class="calc-button-row">
                                 <div class="button" onclick="deleteValue()"><</div>
                                 <div class="button" onclick="numbers(0)" >0</div>
-                                <div class="button">C</div>
+                                <div id="clear" class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button id="submit" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -52,11 +52,12 @@
         </div>
         <div class="notify-section">
             <p class="notify">❌ Pin Didn't Match, Please try again</p>
-            <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+            <p id="success" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 
     <script>
+
         document.getElementById("pinBtn").addEventListener('click', function(){
             const pinGenerate = Math.random()*10000;
             let pinInt = Math.round(pinGenerate);
@@ -80,6 +81,14 @@
             inputValue = inputValue.slice(0,-1);
             document.getElementById("numberInput").value = inputValue;
         }
+
+        // clear all input numbers 
+        document.getElementById("clear").addEventListener("click",function(){
+            document.getElementById("numberInput").value = "";
+        })
+
+       
+
         
 
     </script>
