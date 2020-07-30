@@ -51,16 +51,18 @@
             </div>
         </div>
         <div class="notify-section">
-            <p class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="warning" class="notify">❌ Pin Didn't Match, Please try again</p>
             <p id="success" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
 
     <script>
 
+
+        let pinInt = 0 ;
         document.getElementById("pinBtn").addEventListener('click', function(){
             const pinGenerate = Math.random()*10000;
-            let pinInt = Math.round(pinGenerate);
+            pinInt = Math.round(pinGenerate);
             if (pinInt.toString().length == 3){
                 pinInt = pinInt*10;
                 document.getElementById("pinInput").value = pinInt;
@@ -87,7 +89,20 @@
             document.getElementById("numberInput").value = "";
         })
 
-       
+        // pin match and the success button will display
+        document.getElementById("submit").addEventListener("click", function(){
+            if (pinInt == inputValue){
+                document.getElementById("success").style.display = "block";
+            }
+            // pin didn't match and warning btn will display and success btn will hide 
+            else if(pinInt != inputValue){
+                document.getElementById("success").style.display = "none";
+                document.getElementById("warning").style.display = "block";
+            }
+        })
+
+        
+        
 
         
 
