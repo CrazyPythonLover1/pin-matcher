@@ -19,27 +19,27 @@
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="numberInput" class="form-control" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div class="button"  onclick="numbers(7)" > 7</div>
+                              <div class="button" onclick="numbers(8)"  >8</div>
+                              <div class="button" onclick="numbers(9)" >9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div id="4" class="button" onclick="numbers(4)" >4</div>
+                              <div id="5" class="button" onclick="numbers(5)" >5</div>
+                              <div id="6" class="button" onclick="numbers(6)">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div id="1" class="button" onclick="numbers(1)" >1</div>
+                              <div id="2" class="button" onclick="numbers(2)" >2</div>
+                              <div id="3" class="button" onclick="numbers(3)"  >3</div>
                             </div>
                             <div class="calc-button-row">
                                 <div class="button"><</div>
-                                <div class="button">0</div>
+                                <div class="button" onclick="numbers(0)" >0</div>
                                 <div class="button">C</div>
                             </div>
                             <div>
@@ -62,14 +62,23 @@
             let pinInt = Math.round(pinGenerate);
             if (pinInt.toString().length == 3){
                 pinInt = pinInt*10;
-                console.log(pinInt)
                 document.getElementById("pinInput").value = pinInt;
             }
             else{
                 document.getElementById("pinInput").value = pinInt;
-            }
-            
+            }            
         })
+
+        // display input numbers
+        let inputValue = "";
+        function numbers(value){
+            inputValue = inputValue + value;
+            document.getElementById("numberInput").value = inputValue;
+        }
+
+        
+        
+
     </script>
 </body>
 </html>
