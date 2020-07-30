@@ -38,7 +38,7 @@
                               <div id="3" class="button" onclick="numbers(3)"  >3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
+                                <div class="button" onclick="deleteValue()"><</div>
                                 <div class="button" onclick="numbers(0)" >0</div>
                                 <div class="button">C</div>
                             </div>
@@ -76,7 +76,10 @@
             document.getElementById("numberInput").value = inputValue;
         }
 
-        
+        function deleteValue(){
+            inputValue = inputValue.slice(0,-1);
+            document.getElementById("numberInput").value = inputValue;
+        }
         
 
     </script>
