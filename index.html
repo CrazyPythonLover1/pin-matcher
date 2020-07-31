@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input id="pinInput" class="form-control" type="text">
+                    <input id="pinGeneratedValue" class="form-control" type="text">
                     <button id="pinBtn" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                 <div id="clear" class="button">C</div>
                             </div>
                             <div>
-                                <button id="submit" type="submit" class="submit-btn">Submit</button>
+                                <button id="submitBtn" type="submit" class="submit-btn">Submit</button>
                                 <p id="tryAction" class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -59,68 +59,75 @@
     <script>
 
 
-        let pinInt = 0 ;
+        let pinGeneratedValue = "" ;
+        // set the pin generated value into input 
+        function setPinGeneratedValue(value){
+            document.getElementById("pinGeneratedValue").value = value;
+        }
+        // pin generator 
         document.getElementById("pinBtn").addEventListener('click', function(){
-            const pinGenerate = Math.random()*10000;
-            pinInt = Math.round(pinGenerate);
-            if (pinInt.toString().length == 3){
-                pinInt = pinInt*10;
-                document.getElementById("pinInput").value = pinInt;
+            const pinGenerator = Math.random()*10000;
+            pinGeneratedValue = Math.round(pinGenerator);
+            if (pinGeneratedValue.toString().length == 3){
+                // if the value is 0333 that means 333 then it will be 3330
+                pinGeneratedValue = pinGeneratedValue*10;
+                setPinGeneratedValue(pinGeneratedValue);
             }
-            else if (pinInt.toString().length == 2){
-                pinInt = pinInt*100;
-                document.getElementById("pinInput").value = pinInt;
+            else if (pinGeneratedValue.toString().length == 2){
+                pinGeneratedValue = pinGeneratedValue*100;
+                setPinGeneratedValue(pinGeneratedValue);
             }
-            else if (pinInt.toString().length == 1){
-                pinInt = pinInt*1000;
-                document.getElementById("pinInput").value = pinInt;
+            else if (pinGeneratedValue.toString().length == 1){
+                pinGeneratedValue = pinGeneratedValue*1000;
+                setPinGeneratedValue(pinGeneratedValue);
             }
-            else if (pinInt.toString().length == 0){
-                pinInt = (pinInt+1)*1000;
-                document.getElementById("pinInput").value = pinInt;
+            else if (pinGeneratedValue.toString().length == 0){
+                pinGeneratedValue = (pinGeneratedValue+1)*1000;
+                setPinGeneratedValue(pinGeneratedValue);
             }
             else{
-                document.getElementById("pinInput").value = pinInt;
+                document.getElementById("pinGeneratedValue").value = pinGeneratedValue;
             }            
         })
 
         // display input numbers
-        let inputValue = "";
+        let currentNumberValue = "";
         function numbers(value){
-            inputValue = inputValue + value;
-            document.getElementById("numberInput").value = inputValue;
+            currentNumberValue = currentNumberValue + value;
+            document.getElementById("numberInput").value = currentNumberValue;
         }
 
+        // delete la last item in the string 
         function deleteValue(){
-            inputValue = inputValue.slice(0,-1);
-            document.getElementById("numberInput").value = inputValue;
+            currentNumberValue = currentNumberValue.slice(0,-1);
+            document.getElementById("numberInput").value = currentNumberValue;
         }
 
-        // clear all input numbers 
+        // clear all Display numbers 
         document.getElementById("clear").addEventListener("click",function(){
-            inputValue = "";
-            document.getElementById("numberInput").value = inputValue;
+            currentNumberValue = "";
+            document.getElementById("numberInput").value = currentNumberValue;
         })
 
 
         // pin match and the success button will display
         let leftTry = 3;
-            document.getElementById("submit").addEventListener("click", function(){          
-                    if (pinInt == inputValue && pinInt.toString().length == 4 && inputValue.toString().length == 4){
+            document.getElementById("submitBtn").addEventListener("click", function(){          
+                    if (pinGeneratedValue == currentNumberValue && pinGeneratedValue.toString().length == 4 && currentNumberValue.toString().length == 4){
                         document.getElementById("success").style.display = "block";
                         document.getElementById("warning").style.display = "none";
-                        document.getElementById("submit").style.display = "none";
-                        document.getElementById("tryAction").style.display = "none";
+                        leftTry = leftTry - 1;
+                        document.getElementById("tryAction").innerText = leftTry + " try left"
                     }
 
                     // pin didn't match and warning btn will display and success btn will hide                   
-                    else if(pinInt != inputValue && leftTry>0 ){                     
+                    else if(pinGeneratedValue != currentNumberValue && leftTry>0 ){                     
                             document.getElementById("success").style.display = "none";
                             document.getElementById("warning").style.display = "block";
                             leftTry = leftTry - 1;
                             document.getElementById("tryAction").innerText = leftTry + " try left"
                             if (leftTry==0){
-                                document.getElementById("submit").style.display = "none";
+                                document.getElementById("submitBtn").style.display = "none";
                             }
                             console.log(leftTry);
                     }
