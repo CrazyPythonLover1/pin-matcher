@@ -44,7 +44,7 @@
                             </div>
                             <div>
                                 <button id="submit" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p id="tryAction" class="action-left">3 try left</p>
                             </div>
                     </div>
                 </div>
@@ -89,22 +89,31 @@
             document.getElementById("numberInput").value = "";
         })
 
+
         // pin match and the success button will display
-        document.getElementById("submit").addEventListener("click", function(){
-            if (pinInt == inputValue){
-                document.getElementById("success").style.display = "block";
-            }
-            // pin didn't match and warning btn will display and success btn will hide 
-            else if(pinInt != inputValue){
-                document.getElementById("success").style.display = "none";
-                document.getElementById("warning").style.display = "block";
-            }
-        })
+        let leftTry = 3;
+            document.getElementById("submit").addEventListener("click", function(){          
+                    if (pinInt == inputValue && pinInt.toString().length == 4 && inputValue.toString().length == 4){
+                        document.getElementById("success").style.display = "block";
+                        document.getElementById("warning").style.display = "none";
+                        document.getElementById("submit").style.display = "none";
+                    }
 
-        
-        
-
-        
+                    // pin didn't match and warning btn will display and success btn will hide                   
+                    else if(pinInt != inputValue && leftTry>0 ){                     
+                            document.getElementById("success").style.display = "none";
+                            document.getElementById("warning").style.display = "block";
+                            leftTry = leftTry - 1;
+                            document.getElementById("tryAction").innerText = leftTry + " try left"
+                            if (leftTry==0){
+                                document.getElementById("submit").style.display = "none";
+                            }
+                            console.log(leftTry);
+                    }
+                }) 
+                
+                
+             
 
     </script>
 </body>
