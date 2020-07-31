@@ -67,6 +67,18 @@
                 pinInt = pinInt*10;
                 document.getElementById("pinInput").value = pinInt;
             }
+            else if (pinInt.toString().length == 2){
+                pinInt = pinInt*100;
+                document.getElementById("pinInput").value = pinInt;
+            }
+            else if (pinInt.toString().length == 1){
+                pinInt = pinInt*1000;
+                document.getElementById("pinInput").value = pinInt;
+            }
+            else if (pinInt.toString().length == 0){
+                pinInt = (pinInt+1)*1000;
+                document.getElementById("pinInput").value = pinInt;
+            }
             else{
                 document.getElementById("pinInput").value = pinInt;
             }            
@@ -86,7 +98,8 @@
 
         // clear all input numbers 
         document.getElementById("clear").addEventListener("click",function(){
-            document.getElementById("numberInput").value = "";
+            inputValue = "";
+            document.getElementById("numberInput").value = inputValue;
         })
 
 
